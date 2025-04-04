@@ -72,7 +72,12 @@ if submitted and selected_foods:
 
     st.markdown("### 🎯 与目标值对比：")
     plan = plans[selected_plan]
-    comparison = {}
+    total_target_kcal = sum(plan[key] for key in plan)
+    total_diff_kcal = totals["kcal"] - total_target_kcal
+    st.write(f"📊 总热量目标：{total_target_kcal} kcal")
+    st.write(f"📉 热量差值：{total_diff_kcal:+.1f} kcal")
+
+    comparison = []
     for key in ["carbs", "protein", "fat"]:
         actual_g = totals[key]
         actual_kcal = actual_g * calories_per_gram[key]
@@ -85,8 +90,8 @@ if submitted and selected_foods:
             status = "🔺 超出"
         elif diff_kcal < -20:
             status = "🔻 不足"
-        comparison[key] = {
-            "宏量营养素": key,
+        comparison.append({
+            "营养素": key,
             "实际 (kcal)": round(actual_kcal),
             "目标 (kcal)": round(target_kcal),
             "差值 (kcal)": round(diff_kcal),
@@ -94,10 +99,10 @@ if submitted and selected_foods:
             "目标 (g)": round(target_g, 1),
             "差值 (g)": round(diff_g, 1),
             "状态": status
-        }
+        })
 
-    df_compare = pd.DataFrame.from_dict(comparison, orient="index")
-    st.dataframe(df_compare[["实际 (kcal)", "目标 (kcal)", "差值 (kcal)", "实际 (g)", "目标 (g)", "差值 (g)", "状态"]])
+    df_compare = pd.DataFrame(comparison)
+    st.dataframe(df_compare.set_index("营养素"))
 
     st.markdown("### 📊 热量来源比例 (饼图)")
     labels = ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"]

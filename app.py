@@ -26,6 +26,16 @@ foods = {
     "Mixed Vegetables": {"kcal": 30, "protein": 2, "carbs": 5, "fat": 0.3, "sugar": 2, "category": "蔬菜"},
 }
 
+# 每克热量
+calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}
+
+# 目标摄入计划
+plans = {
+    "低碳日": {"carbs": 160, "protein": 500, "fat": 495},
+    "中碳日": {"carbs": 240, "protein": 500, "fat": 450},
+    "高碳日": {"carbs": 360, "protein": 460, "fat": 405},
+}
+
 st.subheader("输入各食物的摄入量（克）")
 
 quantities = {}
@@ -35,6 +45,7 @@ with st.form("nutrition_form"):
     for food, nutrients in foods.items():
         qty = st.number_input(f"{food}（g）", min_value=0.0, step=10.0, key=food)
         quantities[food] = qty
+    selected_plan = st.selectbox("选择你的饮食计划", list(plans.keys()))
     submitted = st.form_submit_button("计算")
 
 if submitted:
@@ -43,11 +54,35 @@ if submitted:
         for key in totals:
             totals[key] += nutrients[key] * qty / 100
 
+    totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
+
     st.markdown("### 🧾 总结果")
     st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
     st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
+
+    st.markdown("### 🎯 与目标值对比：")
+    plan = plans[selected_plan]
+    comparison = {}
+    for key in ["carbs", "protein", "fat"]:
+        actual_kcal = totals[key] * calories_per_gram[key]
+        target_kcal = plan[key]
+        diff = actual_kcal - target_kcal
+        status = "✅ 正常"
+        if diff > 20:
+            status = "🔺 超出"
+        elif diff < -20:
+            status = "🔻 不足"
+        comparison[key] = {
+            "实际 (kcal)": actual_kcal,
+            "目标 (kcal)": target_kcal,
+            "差值": diff,
+            "状态": status
+        }
+
+    df_compare = pd.DataFrame(comparison).T
+    st.dataframe(df_compare.style.format({"实际 (kcal)": "{:.0f}", "目标 (kcal)": "{:.0f}", "差值": "{:+.0f}"}))
 
     st.markdown("### 📊 热量来源比例 (饼图)")
     labels = ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"]
@@ -65,4 +100,4 @@ if submitted:
         f"💪 蛋白质：{totals['protein']:.1f} g\n"
         f"🔥 热量：{totals['kcal']:.1f} kcal"
     )
-    st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)
+    st.text_area("📎 ", summary_text)

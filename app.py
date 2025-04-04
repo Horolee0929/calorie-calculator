@@ -74,23 +74,30 @@ if submitted and selected_foods:
     plan = plans[selected_plan]
     comparison = {}
     for key in ["carbs", "protein", "fat"]:
-        actual_kcal = totals[key] * calories_per_gram[key]
+        actual_g = totals[key]
+        actual_kcal = actual_g * calories_per_gram[key]
         target_kcal = plan[key]
-        diff = actual_kcal - target_kcal
+        target_g = target_kcal / calories_per_gram[key]
+        diff_kcal = actual_kcal - target_kcal
+        diff_g = actual_g - target_g
         status = "✅ 正常"
-        if diff > 20:
+        if diff_kcal > 20:
             status = "🔺 超出"
-        elif diff < -20:
+        elif diff_kcal < -20:
             status = "🔻 不足"
         comparison[key] = {
-            "实际 (kcal)": actual_kcal,
-            "目标 (kcal)": target_kcal,
-            "差值": diff,
+            "宏量营养素": key,
+            "实际 (kcal)": round(actual_kcal),
+            "目标 (kcal)": round(target_kcal),
+            "差值 (kcal)": round(diff_kcal),
+            "实际 (g)": round(actual_g, 1),
+            "目标 (g)": round(target_g, 1),
+            "差值 (g)": round(diff_g, 1),
             "状态": status
         }
 
-    df_compare = pd.DataFrame(comparison).T
-    st.dataframe(df_compare.style.format({"实际 (kcal)": "{:.0f}", "目标 (kcal)": "{:.0f}", "差值": "{:+.0f}"}))
+    df_compare = pd.DataFrame.from_dict(comparison, orient="index")
+    st.dataframe(df_compare[["实际 (kcal)", "目标 (kcal)", "差值 (kcal)", "实际 (g)", "目标 (g)", "差值 (g)", "状态"]])
 
     st.markdown("### 📊 热量来源比例 (饼图)")
     labels = ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"]
@@ -109,3 +116,4 @@ if submitted and selected_foods:
         f"🔥 热量：{totals['kcal']:.1f} kcal"
     )
     st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)
+

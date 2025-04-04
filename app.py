@@ -101,9 +101,9 @@ if submitted and selected_foods:
     })
 
     def status(diff):
-        if diff < -1:
+        if diff < -5:
             return "🔻 不足"
-        elif diff > 1:
+        elif diff > 5:
             return "🔺 过高"
         else:
             return "✅ 正常"

@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 
-
 st.set_page_config(page_title="卡路里计算器", layout="centered")
 st.title("🥗 卡路里计算器")
 
@@ -29,7 +28,6 @@ foods = {
 st.subheader("输入各食物的摄入量（克）")
 
 quantities = {}
-category_totals = {}
 totals = {"kcal": 0, "protein": 0, "carbs": 0, "fat": 0, "sugar": 0}
 
 with st.form("nutrition_form"):
@@ -41,21 +39,18 @@ with st.form("nutrition_form"):
 if submitted:
     for food, qty in quantities.items():
         nutrients = foods[food]
-        category = nutrients["category"]
-        if category not in category_totals:
-            category_totals[category] = {"kcal": 0, "protein": 0, "carbs": 0, "sugar": 0}
         for key in totals:
-            value = nutrients[key] * qty / 100
-            totals[key] += value
-            if key in category_totals[category]:
-                category_totals[category][key] += value
+            totals[key] += nutrients[key] * qty / 100
 
     st.markdown("### 🧾 总结果")
-    st.write(f"🔸 **总热量**: {totals['kcal']:.1f} kcal")
-    st.write(f"💪 **蛋白质**: {totals['protein']:.1f} g")
-    st.write(f"🥖 **碳水化合物**: {totals['carbs']:.1f} g")
-    st.write(f"🍬 **糖**: {totals['sugar']:.1f} g")
+    st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
+    st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
+    st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
+    st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
-    st.markdown("### 📊 分类可视化")
-    df = pd.DataFrame(category_totals).T
-    st.bar_chart(df[["kcal", "protein", "carbs", "sugar"]])
+    st.markdown("### 📊 营养成分比例 (饼图)")
+    labels = ["碳水", "脂肪", "蛋白质"]
+    values = [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4]  # 每克的能量换算
+
+    df_pie = pd.DataFrame({"成分": labels, "热量 (kcal)": values})
+    st.pyplot(df_pie.set_index("成分").plot.pie(y="热量 (kcal)", autopct="%.1f%%", ylabel="", legend=False, figsize=(4,4)).figure)

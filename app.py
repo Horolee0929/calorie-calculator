@@ -81,7 +81,8 @@ if submitted and selected_foods:
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
    
-df_diff = pd.DataFrame({
+st.subheader("📊 营养素差值")
+    df_diff = pd.DataFrame({
         "营养素": ["carbs", "fat", "protein"],
         "实际 (kcal)": [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4],
         "目标 (kcal)": [plan["carbs"], plan["fat"], plan["protein"]],
@@ -104,7 +105,7 @@ df_diff = pd.DataFrame({
         ]
     })
 
-    def status(diff):
+def status(diff):
         if diff < -5:
             return "🔻 不足"
         elif diff > 5:
@@ -115,13 +116,7 @@ df_diff = pd.DataFrame({
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
 
-
-
-
-
-
-
-    
+   
     st.subheader("🍰 热量占比图")
     pie_data = pd.DataFrame({
         "来源": ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"],
@@ -130,13 +125,6 @@ df_diff = pd.DataFrame({
     fig = px.pie(pie_data, names="来源", values="热量", hole=0.3)
     st.plotly_chart(fig)
 
-
-
-
-
-
-
-    
     st.subheader("📋 复制粘贴到 Notion")
     notion_text = (
         f"📊 今日总摄入：\n"

@@ -139,20 +139,17 @@ if submitted and selected_foods:
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 可复制文本：", output_text)
     
+ # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []
 
-    nutrient_map = {
-        "碳水": "carbs",
-        "脂肪": "fat",
-        "蛋白质": "protein"
-    }
+    nutrient_map = {"carbs": "碳水", "fat": "脂肪", "protein": "蛋白质"}
 
-    for nutrient_label, nutrient in nutrient_map.items():
+    for nutrient, label in nutrient_map.items():
         try:
-            diff = df_diff.loc[nutrient_label, "差值 (g)"]
+            diff = df_diff.loc[label, "差值 (g)"]
         except KeyError:
-            continue  # 安全处理
+            continue
 
         if diff < -5:
             deficit = abs(diff)
@@ -164,12 +161,11 @@ if submitted and selected_foods:
                     "protein": "蛋白质来源"
                 }[nutrient]
             ]
-            # 营养素含量最多的食物
             candidates = sorted(candidates, key=lambda x: x[1][nutrient], reverse=True)
             if candidates:
                 top_food, top_nutri = candidates[0]
                 amount_needed = round(deficit / (top_nutri[nutrient] / 100), 1)
-                suggestions.append(f"👉 {nutrient_label}不足，建议补充 {amount_needed}g {top_food}")
+                suggestions.append(f"👉 {label}不足，建议补充 {amount_needed}g {top_food}")
 
     if suggestions:
         for s in suggestions:

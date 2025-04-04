@@ -81,7 +81,7 @@ if submitted and selected_foods:
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
    
- st.subheader("📊 营养素差值")
+ st.subheader("📊 营养素克数差值")
     df_diff = pd.DataFrame({
         "营养素": ["carbs", "fat", "protein"],
         "实际 (kcal)": [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4],

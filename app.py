@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+
 
 st.set_page_config(page_title="卡路里计算器", layout="centered")
 st.title("🥗 卡路里计算器")

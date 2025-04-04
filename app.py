@@ -81,8 +81,7 @@ if submitted and selected_foods:
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
    
- st.subheader("📊 营养素克数差值")
-    df_diff = pd.DataFrame({
+df_diff = pd.DataFrame({
         "营养素": ["carbs", "fat", "protein"],
         "实际 (kcal)": [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4],
         "目标 (kcal)": [plan["carbs"], plan["fat"], plan["protein"]],
@@ -98,6 +97,11 @@ if submitted and selected_foods:
             totals["fat"] - plan["fat"] / 9,
             totals["protein"] - plan["protein"] / 4
         ],
+        "差值 (%)": [
+            (totals["carbs"] - plan["carbs"] / 4) / (plan["carbs"] / 4) * 100,
+            (totals["fat"] - plan["fat"] / 9) / (plan["fat"] / 9) * 100,
+            (totals["protein"] - plan["protein"] / 4) / (plan["protein"] / 4) * 100,
+        ]
     })
 
     def status(diff):
@@ -110,6 +114,7 @@ if submitted and selected_foods:
 
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
+
 
 
 

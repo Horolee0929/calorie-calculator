@@ -73,8 +73,16 @@ if submitted and selected_foods:
     totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
 
     st.subheader("🧾 总结果")
-    st.write(f"🎯 **目标热量**: {total_target_kcal:.1f} kcal")
-    st.write(f"📉 **热量差值**: {total_diff_kcal:+.1f} kcal")
+    target_range_min = 1150
+    target_range_max = 1250
+    st.write(f"🎯 **建议热量区间**: {target_range_min}–{target_range_max} kcal")
+    st.write(f"🔥 **实际摄入热量**: {totals['kcal']:.1f} kcal")
+    if totals['kcal'] < target_range_min:
+        st.write(f"📉 **与建议区间差值**: {totals['kcal'] - target_range_min:.1f} kcal 🔻 不足")
+    elif totals['kcal'] > target_range_max:
+        st.write(f"📈 **与建议区间差值**: {totals['kcal'] - target_range_max:+.1f} kcal 🔺 过高")
+    else:
+        st.write("✅ 热量在建议区间内")
     st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
     st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
@@ -83,6 +91,7 @@ if submitted and selected_foods:
     plan = plans[selected_plan]
     total_target_kcal = plan["carbs"] + plan["fat"] + plan["protein"]
     total_diff_kcal = totals["kcal"] - total_target_kcal
+
     
     st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({

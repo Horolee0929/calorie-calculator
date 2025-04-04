@@ -56,3 +56,13 @@ if submitted:
     df_pie = pd.DataFrame({"来源": labels, "热量 (kcal)": values})
     fig = px.pie(df_pie, names="来源", values="热量 (kcal)", title="各营养素对总热量的贡献", hole=0.4)
     st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("### 📋 可复制结果")
+    summary_text = (
+        f"📋 今日总摄入：\n"
+        f"🥖 碳水：{totals['carbs']:.1f} g\n"
+        f"🧈 脂肪：{totals['fat']:.1f} g\n"
+        f"💪 蛋白质：{totals['protein']:.1f} g\n"
+        f"🔥 热量：{totals['kcal']:.1f} kcal"
+    )
+    st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)

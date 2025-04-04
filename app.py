@@ -144,7 +144,9 @@ if submitted and selected_foods:
     suggestions = []
 
     for nutrient, unit_cal in calories_per_gram.items():
-        diff = df_diff.loc[nutrient, "差值 (g)"]
+        nutrient_map = {"carbs": "碳水", "fat": "脂肪", "protein": "蛋白质"}
+        nutrient_label = nutrient_map[nutrient]
+        diff = df_diff.loc[nutrient_label, "差值 (g)"]
         if diff < -5:
             deficit = abs(diff)
             candidates = [
@@ -166,4 +168,3 @@ if submitted and selected_foods:
             st.write(s)
     else:
         st.write("✅ 所有营养素均已达标，无需补充")
-

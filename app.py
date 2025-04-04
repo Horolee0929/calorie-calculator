@@ -73,12 +73,17 @@ if submitted and selected_foods:
     totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
 
     st.subheader("🧾 总结果")
+    st.write(f"🎯 **目标热量**: {total_target_kcal:.1f} kcal")
+    st.write(f"📉 **热量差值**: {total_diff_kcal:+.1f} kcal")
     st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
     st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
     plan = plans[selected_plan]
+    total_target_kcal = plan["carbs"] + plan["fat"] + plan["protein"]
+    total_diff_kcal = totals["kcal"] - total_target_kcal
+    
     st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
         "营养素": ["carbs", "fat", "protein"],

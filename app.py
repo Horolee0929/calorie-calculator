@@ -36,23 +36,31 @@ plans = {
     "高碳日": {"carbs": 360, "protein": 460, "fat": 405},
 }
 
-st.subheader("输入各食物的摄入量（克）")
+st.subheader("选择食物并输入摄入量")
 
+selected_foods = st.multiselect("选择今天吃过的食物", list(foods.keys()))
 quantities = {}
 totals = {"kcal": 0, "protein": 0, "carbs": 0, "fat": 0, "sugar": 0}
 
 with st.form("nutrition_form"):
-    for food, nutrients in foods.items():
+    for food in selected_foods:
         qty = st.number_input(f"{food}（g）", min_value=0.0, step=10.0, key=food)
         quantities[food] = qty
     selected_plan = st.selectbox("选择你的饮食计划", list(plans.keys()))
     submitted = st.form_submit_button("计算")
 
-if submitted:
+if submitted and selected_foods:
+    st.markdown("### 🍽️ 食物摄入明细")
+    details = []
     for food, qty in quantities.items():
         nutrients = foods[food]
+        row = {"食物": food, "克数": qty}
         for key in totals:
-            totals[key] += nutrients[key] * qty / 100
+            value = nutrients[key] * qty / 100
+            totals[key] += value
+            row[key] = round(value, 1)
+        details.append(row)
+    st.dataframe(pd.DataFrame(details))
 
     totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
 
@@ -100,4 +108,4 @@ if submitted:
         f"💪 蛋白质：{totals['protein']:.1f} g\n"
         f"🔥 热量：{totals['kcal']:.1f} kcal"
     )
-    st.text_area("📎 ", summary_text)
+    st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)

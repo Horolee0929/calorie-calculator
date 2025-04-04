@@ -129,6 +129,5 @@ if submitted and selected_foods:
 🧈 脂肪：{totals['fat']:.1f} g
 💪 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal
-📉 热量差值：{total_diff_kcal:+.1f} kcal"""
     st.text_area("📎 可复制文本：", output_text)
 

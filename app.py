@@ -116,4 +116,3 @@ if submitted and selected_foods:
         f"🔥 热量：{totals['kcal']:.1f} kcal"
     )
     st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)
-

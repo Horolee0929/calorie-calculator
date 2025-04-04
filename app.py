@@ -123,12 +123,12 @@ if submitted and selected_foods:
     fig = px.pie(pie_data, names="来源", values="热量", hole=0.3)
     st.plotly_chart(fig)
 
-  st.subheader("📋 复制")
-    notion_text = f"""📊 今日总摄入：
+    st.subheader("📋 结果文本")
+    output_text = f"""📊 今日总摄入：
 🥖 碳水：{totals['carbs']:.1f} g
 🧈 脂肪：{totals['fat']:.1f} g
 💪 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal
 📉 热量差值：{total_diff_kcal:+.1f} kcal"""
-    st.text_area("📎复制以下内容：", notion_text)
+    st.text_area("📎 可复制文本：", output_text)
 

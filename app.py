@@ -116,6 +116,7 @@ def status(diff):
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
 
+
    
     st.subheader("🍰 热量占比图")
     pie_data = pd.DataFrame({

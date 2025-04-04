@@ -138,4 +138,32 @@ if submitted and selected_foods:
 💪 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 可复制文本：", output_text)
+    
+# 💡 推荐补充建议
+    st.subheader("🔄 推荐补充")
+    suggestions = []
+
+    for nutrient, unit_cal in calories_per_gram.items():
+        diff = df_diff.loc[nutrient, "差值 (g)"]
+        if diff < -5:
+            deficit = abs(diff)
+            candidates = [
+                (food, foods[food]) for food in foods
+                if foods[food]["category"] == {
+                    "carbs": "碳水来源",
+                    "fat": "脂肪来源",
+                    "protein": "蛋白质来源"
+                }[nutrient]
+            ]
+            # 取单位含该营养素最多的前三项
+            candidates.sort(key=lambda x: x[1][nutrient], reverse=True)
+            top_food, top_nutri = candidates[0]
+            amount_needed = round(deficit / (top_nutri[nutrient] / 100), 1)
+            suggestions.append(f"👉 为补充 {nutrient}，可摄入 {amount_needed}g {top_food}")
+
+    if suggestions:
+        for s in suggestions:
+            st.write(s)
+    else:
+        st.write("✅ 所有营养素均已达标，无需补充")
 

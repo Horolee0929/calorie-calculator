@@ -80,7 +80,6 @@ if submitted and selected_foods:
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
-   
     st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
         "营养素": ["carbs", "fat", "protein"],
@@ -105,7 +104,7 @@ if submitted and selected_foods:
         ]
     })
 
-     def status(diff):
+    def status(diff):
         if diff < -5:
             return "🔻 不足"
         elif diff > 5:
@@ -115,7 +114,6 @@ if submitted and selected_foods:
 
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
-
 
    
     st.subheader("🍰 热量占比图")

@@ -15,7 +15,8 @@ foods = {
     "Sandwich Cracks": {"kcal": 483, "protein": 10, "carbs": 55, "fat": 23, "sugar": 3.1},
     "Mixed Vegetables": {"kcal": 30, "protein": 2, "carbs": 5, "fat": 0.3, "sugar": 2},
     "Oats": {"kcal": 379, "protein": 13.5, "carbs": 68, "fat": 6.5, "sugar": 1},
-    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2}
+    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2},
+    "Tofu": {"kcal": 126, "protein": 13, "carbs": 0, "fat": 7, "sugar": 0}
 }
 
 st.subheader("输入各食物的摄入量（克）")
@@ -41,3 +42,4 @@ if submitted:
     st.write(f"🥖 **碳水化合物**: {totals['carbs']:.1f} g")
     st.write(f"🧈 **脂肪**: {totals['fat']:.1f} g")
     st.write(f"🍬 **糖**: {totals['sugar']:.1f} g")
+

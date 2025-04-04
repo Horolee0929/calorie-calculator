@@ -15,12 +15,20 @@ foods = {
     "Shrimp": {"kcal": 85, "protein": 20, "carbs": 0, "fat": 0.5, "sugar": 0, "category": "蛋白质来源"},
     "Tofu": {"kcal": 126, "protein": 13, "carbs": 0, "fat": 7, "sugar": 0, "category": "蛋白质来源"},
     "Greek Yogurt 2": {"kcal": 58, "protein": 11, "carbs": 3.5, "fat": 0, "sugar": 3.4, "category": "蛋白质来源"},
+    "Boiled Egg (1个/53g)": {"kcal": 75.8, "protein": 6.9, "carbs": 0.6, "fat": 5.3, "sugar": 0.3, "category": "蛋白质来源"},
 
     # 碳水来源
     "Protein Bread": {"kcal": 280, "protein": 11, "carbs": 20, "fat": 15, "sugar": 0.6, "category": "碳水来源"},
     "Oats": {"kcal": 379, "protein": 13.5, "carbs": 68, "fat": 6.5, "sugar": 1, "category": "碳水来源"},
     "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},
     "Sandwich Cracks": {"kcal": 483, "protein": 10, "carbs": 55, "fat": 23, "sugar": 3.1, "category": "碳水来源"},
+    "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
+
+    # 脂肪来源
+    "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},
+    "Avocado": {"kcal": 160, "protein": 2, "carbs": 8.5, "fat": 15, "sugar": 0.7, "category": "脂肪来源"},
+    "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "脂肪来源"},
+    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "脂肪来源"},
 
     # 蔬菜
     "Mixed Vegetables": {"kcal": 30, "protein": 2, "carbs": 5, "fat": 0.3, "sugar": 2, "category": "蔬菜"},
@@ -44,80 +52,9 @@ totals = {"kcal": 0, "protein": 0, "carbs": 0, "fat": 0, "sugar": 0}
 
 with st.form("nutrition_form"):
     for food in selected_foods:
-        qty = st.number_input(f"{food}（g）", min_value=0.0, step=10.0, key=food)
-        quantities[food] = qty
+        unit = "个" if "Boiled Egg" in food else "g"
+        qty = st.number_input(f"{food}（{unit}）", min_value=0.0, step=1.0 if unit == "个" else 10.0, key=food)
+        gram_qty = qty * 53 if unit == "个" else qty
+        quantities[food] = gram_qty
     selected_plan = st.selectbox("选择你的饮食计划", list(plans.keys()))
     submitted = st.form_submit_button("计算")
-
-if submitted and selected_foods:
-    st.markdown("### 🍽️ 食物摄入明细")
-    details = []
-    for food, qty in quantities.items():
-        nutrients = foods[food]
-        row = {"食物": food, "克数": qty}
-        for key in totals:
-            value = nutrients[key] * qty / 100
-            totals[key] += value
-            row[key] = round(value, 1)
-        details.append(row)
-    st.dataframe(pd.DataFrame(details))
-
-    totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
-
-    st.markdown("### 🧾 总结果")
-    st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
-    st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
-    st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
-    st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
-
-    st.markdown("### 🎯 与目标值对比：")
-    plan = plans[selected_plan]
-    total_target_kcal = sum(plan[key] for key in plan)
-    total_diff_kcal = totals["kcal"] - total_target_kcal
-    st.write(f"📊 总热量目标：{total_target_kcal} kcal")
-    st.write(f"📉 热量差值：{total_diff_kcal:+.1f} kcal")
-
-    comparison = []
-    for key in ["carbs", "protein", "fat"]:
-        actual_g = totals[key]
-        actual_kcal = actual_g * calories_per_gram[key]
-        target_kcal = plan[key]
-        target_g = target_kcal / calories_per_gram[key]
-        diff_kcal = actual_kcal - target_kcal
-        diff_g = actual_g - target_g
-        status = "✅ 正常"
-        if diff_kcal > 20:
-            status = "🔺 超出"
-        elif diff_kcal < -20:
-            status = "🔻 不足"
-        comparison.append({
-            "营养素": key,
-            "实际 (kcal)": round(actual_kcal),
-            "目标 (kcal)": round(target_kcal),
-            "差值 (kcal)": round(diff_kcal),
-            "实际 (g)": round(actual_g, 1),
-            "目标 (g)": round(target_g, 1),
-            "差值 (g)": round(diff_g, 1),
-            "状态": status
-        })
-
-    df_compare = pd.DataFrame(comparison)
-    st.dataframe(df_compare.set_index("营养素"))
-
-    st.markdown("### 📊 热量来源比例 (饼图)")
-    labels = ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"]
-    values = [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4]
-
-    df_pie = pd.DataFrame({"来源": labels, "热量 (kcal)": values})
-    fig = px.pie(df_pie, names="来源", values="热量 (kcal)", title="各营养素对总热量的贡献", hole=0.4)
-    st.plotly_chart(fig, use_container_width=True)
-
-    st.markdown("### 📋 可复制结果")
-    summary_text = (
-        f"📋 今日总摄入：\n"
-        f"🥖 碳水：{totals['carbs']:.1f} g\n"
-        f"🧈 脂肪：{totals['fat']:.1f} g\n"
-        f"💪 蛋白质：{totals['protein']:.1f} g\n"
-        f"🔥 热量：{totals['kcal']:.1f} kcal"
-    )
-    st.text_area("📎 复制以下内容粘贴到 Notion", summary_text)

@@ -139,29 +139,37 @@ if submitted and selected_foods:
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 可复制文本：", output_text)
     
-# 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []
 
-    for nutrient, unit_cal in calories_per_gram.items():
-        nutrient_map = {"carbs": "碳水", "fat": "脂肪", "protein": "蛋白质"}
-        nutrient_label = nutrient_map[nutrient]
-        diff = df_diff.loc[nutrient_label, "差值 (g)"]
+    nutrient_map = {
+        "碳水": "carbs",
+        "脂肪": "fat",
+        "蛋白质": "protein"
+    }
+
+    for nutrient_label, nutrient in nutrient_map.items():
+        try:
+            diff = df_diff.loc[nutrient_label, "差值 (g)"]
+        except KeyError:
+            continue  # 安全处理
+
         if diff < -5:
             deficit = abs(diff)
             candidates = [
-                (food, foods[food]) for food in foods
-                if foods[food]["category"] == {
+                (food, data) for food, data in foods.items()
+                if data["category"] == {
                     "carbs": "碳水来源",
                     "fat": "脂肪来源",
                     "protein": "蛋白质来源"
                 }[nutrient]
             ]
-            # 取单位含该营养素最多的前三项
-            candidates.sort(key=lambda x: x[1][nutrient], reverse=True)
-            top_food, top_nutri = candidates[0]
-            amount_needed = round(deficit / (top_nutri[nutrient] / 100), 1)
-            suggestions.append(f"👉 为补充 {nutrient}，可摄入 {amount_needed}g {top_food}")
+            # 营养素含量最多的食物
+            candidates = sorted(candidates, key=lambda x: x[1][nutrient], reverse=True)
+            if candidates:
+                top_food, top_nutri = candidates[0]
+                amount_needed = round(deficit / (top_nutri[nutrient] / 100), 1)
+                suggestions.append(f"👉 {nutrient_label}不足，建议补充 {amount_needed}g {top_food}")
 
     if suggestions:
         for s in suggestions:

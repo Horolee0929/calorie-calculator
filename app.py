@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 st.set_page_config(page_title="卡路里计算器", layout="centered")
 st.title("🥗 卡路里计算器")
@@ -48,9 +49,10 @@ if submitted:
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
-    st.markdown("### 📊 营养成分比例 (饼图)")
-    labels = ["碳水", "脂肪", "蛋白质"]
-    values = [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4]  # 每克的能量换算
+    st.markdown("### 📊 热量来源比例 (饼图)")
+    labels = ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"]
+    values = [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4]
 
-    df_pie = pd.DataFrame({"成分": labels, "热量 (kcal)": values})
-    st.pyplot(df_pie.set_index("成分").plot.pie(y="热量 (kcal)", autopct="%.1f%%", ylabel="", legend=False, figsize=(4,4)).figure)
+    df_pie = pd.DataFrame({"来源": labels, "热量 (kcal)": values})
+    fig = px.pie(df_pie, names="来源", values="热量 (kcal)", title="各营养素对总热量的贡献", hole=0.4)
+    st.plotly_chart(fig, use_container_width=True)

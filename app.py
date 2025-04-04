@@ -80,23 +80,43 @@ if submitted and selected_foods:
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
 
-    st.subheader("🎯 与目标值对比")
-    plan = plans[selected_plan]
-    total_target_kcal = plan["carbs"] + plan["fat"] + plan["protein"]
-    total_actual_kcal = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
-    total_diff_kcal = total_actual_kcal - total_target_kcal
-    st.write(f"🎯 **目标热量**: {total_target_kcal} kcal")
-    st.write(f"📉 **热量差值**: {total_diff_kcal:+.1f} kcal")
-
-    st.subheader("📊 营养素克数差值")
+   
+ st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
-        "营养素": ["碳水", "脂肪", "蛋白质"],
-        "实际摄入 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
-        "目标摄入 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
+        "营养素": ["carbs", "fat", "protein"],
+        "实际 (kcal)": [totals["carbs"] * 4, totals["fat"] * 9, totals["protein"] * 4],
+        "目标 (kcal)": [plan["carbs"], plan["fat"], plan["protein"]],
+        "差值 (kcal)": [
+            totals["carbs"] * 4 - plan["carbs"],
+            totals["fat"] * 9 - plan["fat"],
+            totals["protein"] * 4 - plan["protein"]
+        ],
+        "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
+        "目标 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
+        "差值 (g)": [
+            totals["carbs"] - plan["carbs"] / 4,
+            totals["fat"] - plan["fat"] / 9,
+            totals["protein"] - plan["protein"] / 4
+        ],
     })
-    df_diff["差值 (g)"] = df_diff["实际摄入 (g)"] - df_diff["目标摄入 (g)"]
+
+    def status(diff):
+        if diff < -1:
+            return "🔻 不足"
+        elif diff > 1:
+            return "🔺 过高"
+        else:
+            return "✅ 正常"
+
+    df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
 
+
+
+
+
+
+    
     st.subheader("🍰 热量占比图")
     pie_data = pd.DataFrame({
         "来源": ["碳水 (kcal)", "脂肪 (kcal)", "蛋白质 (kcal)"],
@@ -105,6 +125,13 @@ if submitted and selected_foods:
     fig = px.pie(pie_data, names="来源", values="热量", hole=0.3)
     st.plotly_chart(fig)
 
+
+
+
+
+
+
+    
     st.subheader("📋 复制粘贴到 Notion")
     notion_text = (
         f"📊 今日总摄入：\n"

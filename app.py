@@ -100,14 +100,14 @@ if submitted and selected_foods:
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
         "目标 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
         "差值 (g)": [
-            totals["carbs"] - plan["carbs"] ,
-            totals["fat"] - plan["fat"] ,
-            totals["protein"] - plan["protein"] 
+            plan["carbs"] - totals["carbs"] ,
+            plan["fat"] - totals["fat"] ,
+            plan["protein"] - totals["protein"] 
         ],
         "差值 (%)": [
-            (totals["carbs"] - plan["carbs"] / 4) / (plan["carbs"] / 4) * 100,
-            (totals["fat"] - plan["fat"] / 9) / (plan["fat"] / 9) * 100,
-            (totals["protein"] - plan["protein"] / 4) / (plan["protein"] / 4) * 100,
+            (- totals["carbs"] + plan["carbs"] / 4) / (plan["carbs"] / 4) * 100,
+            (- totals["fat"] + plan["fat"] / 9) / (plan["fat"] / 9) * 100,
+            (- totals["protein"] + plan["protein"] / 4) / (plan["protein"] / 4) * 100,
         ]
     })
 

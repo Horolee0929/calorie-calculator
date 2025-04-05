@@ -93,7 +93,8 @@ if submitted and selected_foods:
     total_diff_kcal = totals["kcal"] - total_target_kcal
 
     
-    st.subheader("📊 营养素差值")
+ 
+st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
         "营养素": ["碳水", "脂肪", "蛋白质"],
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
@@ -114,8 +115,7 @@ if submitted and selected_foods:
             return "✅ 正常"
 
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
-    st.dataframe(df_diff.set_index("营养素"))
-
+    st.dataframe(df_diff)
 
    
     st.subheader(" 热量占比图")

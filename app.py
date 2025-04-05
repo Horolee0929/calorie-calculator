@@ -71,7 +71,7 @@ if submitted and selected_foods:
         for key in totals:
             totals[key] += nutrients[key] * qty / 100
     totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
-
+https://github.com/Horolee0929/calorie-calculator/blob/main/app.py
     st.subheader("🧾 结果")
     target_range_min = 1150
     target_range_max = 1250

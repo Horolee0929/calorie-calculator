@@ -99,9 +99,9 @@ if submitted and selected_foods:
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
         "目标 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
         "差值 (g)": [
-            plan["carbs"] / 4 - totals["carbs"] ,
-            plan["fat"] / 9 - totals["fat"] ,
-            plan["protein"] / 4 - totals["protein"]
+            totals["carbs"] - plan["carbs"] / 4,
+            totals["fat"] - plan["fat"] / 9,
+            totals["protein"] - plan["protein"] / 4
         ]
     }).set_index("营养素")
 
@@ -115,6 +115,7 @@ if submitted and selected_foods:
 
     df_diff["状态"] = df_diff["差值 (g)"].apply(status)
     st.dataframe(df_diff.set_index("营养素"))
+
 
    
     st.subheader(" 热量占比图")

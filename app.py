@@ -94,7 +94,7 @@ if submitted and selected_foods:
 
     
  
-st.subheader("📊 营养素差值")
+    st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
         "营养素": ["碳水", "脂肪", "蛋白质"],
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],

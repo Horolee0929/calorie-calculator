@@ -95,21 +95,15 @@ if submitted and selected_foods:
     
     st.subheader("📊 营养素差值")
     df_diff = pd.DataFrame({
-        "营养素": ["carbs", "fat", "protein"],
-        
+        "营养素": ["碳水", "脂肪", "蛋白质"],
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
-        "目标 (g)": [plan["carbs"] , plan["fat"] , plan["protein"] ],
+        "目标 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
         "差值 (g)": [
-            plan["carbs"] - totals["carbs"] ,
-            plan["fat"] - totals["fat"] ,
-            plan["protein"] - totals["protein"] 
-        ],
-        "差值 (%)": [
-            (- totals["carbs"] + plan["carbs"] / 4) / (plan["carbs"] / 4) * 100,
-            (- totals["fat"] + plan["fat"] / 9) / (plan["fat"] / 9) * 100,
-            (- totals["protein"] + plan["protein"] / 4) / (plan["protein"] / 4) * 100,
+            totals["carbs"] - plan["carbs"] / 4,
+            totals["fat"] - plan["fat"] / 9,
+            totals["protein"] - plan["protein"] / 4
         ]
-    })
+    }).set_index("营养素")
 
     def status(diff):
         if diff < -5:

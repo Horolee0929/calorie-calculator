@@ -72,7 +72,7 @@ if submitted and selected_foods:
             totals[key] += nutrients[key] * qty / 100
     totals["kcal"] = totals["carbs"] * 4 + totals["fat"] * 9 + totals["protein"] * 4
 
-    st.subheader("🧾 总结果")
+    st.subheader("🧾 结果")
     target_range_min = 1150
     target_range_max = 1250
     st.write(f"🎯 **建议热量区间**: {target_range_min}–{target_range_max} kcal")
@@ -126,13 +126,13 @@ if submitted and selected_foods:
     fig = px.pie(pie_data, names="来源", values="热量", hole=0.3)
     st.plotly_chart(fig)
 
-    st.subheader("📋 结果文本")
+    st.subheader("📋 Summary")
     output_text = f"""📊 今日总摄入：
 🥖 碳水：{totals['carbs']:.1f} g
 🧈 脂肪：{totals['fat']:.1f} g
 💪 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal"""
-    st.text_area("📎 可复制文本：", output_text)
+    st.text_area("📎 ：", output_text)
     
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")

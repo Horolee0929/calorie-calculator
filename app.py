@@ -36,6 +36,9 @@ foods = {
 
 calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}
 
+
+
+# 计算过程
 plans = {
     "低碳日": {"carbs": 160, "protein": 500, "fat": 495},
     "中碳日": {"carbs": 240, "protein": 500, "fat": 450},

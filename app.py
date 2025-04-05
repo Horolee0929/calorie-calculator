@@ -83,7 +83,7 @@ if submitted and selected_foods:
         st.write(f"📈 **与建议区间差值**: {totals['kcal'] - target_range_max:+.1f} kcal 🔺 过高")
     else:
         st.write("✅ 热量在建议区间内")
-    st.write(f"🔥 **总热量**: {totals['kcal']:.1f} kcal")
+  
     st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
     st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
     st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")

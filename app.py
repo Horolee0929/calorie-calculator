@@ -99,9 +99,9 @@ if submitted and selected_foods:
         "实际 (g)": [totals["carbs"], totals["fat"], totals["protein"]],
         "目标 (g)": [plan["carbs"] / 4, plan["fat"] / 9, plan["protein"] / 4],
         "差值 (g)": [
-            totals["carbs"] - plan["carbs"] / 4,
-            totals["fat"] - plan["fat"] / 9,
-            totals["protein"] - plan["protein"] / 4
+            plan["carbs"] / 4 - totals["carbs"] ,
+            plan["fat"] / 9 - totals["fat"] ,
+            plan["protein"] / 4 - totals["protein"]
         ]
     }).set_index("营养素")
 

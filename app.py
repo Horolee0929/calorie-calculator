@@ -58,11 +58,11 @@ fat_options = [f for f, v in foods.items() if v["category"] == "脂肪来源"]
 veggie_options = [f for f, v in foods.items() if v["category"] == "蔬菜"]
 snack_options = [f for f, v in foods.items() if v["category"] == "snack"]
 
-selected_carbs = st.multiselect("🥖 选择碳水来源", carb_options)
-selected_proteins = st.multiselect("💪 选择蛋白质来源", protein_options)
-selected_fats = st.multiselect("🧈 选择脂肪来源", fat_options)
+selected_carbs = st.multiselect("🌾 选择碳水来源", carb_options)
+selected_proteins = st.multiselect("🥚 选择蛋白质来源", protein_options)
+selected_fats = st.multiselect("🥑 选择脂肪来源", fat_options)
 selected_veggies = st.multiselect("🥦 选择蔬菜", veggie_options)
-selected_snacks = st.multiselect("🍘 选择零食/小吃", snack_options)
+selected_snacks = st.multiselect("🥨 选择零食/小吃", snack_options)
 
 selected_foods = selected_carbs + selected_proteins + selected_fats + selected_veggies + selected_snacks
 quantities = {}

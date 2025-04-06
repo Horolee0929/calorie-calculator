@@ -20,11 +20,10 @@ foods = {
     # 碳水来源
     "Protein Bread": {"kcal": 280, "protein": 11, "carbs": 20, "fat": 15, "sugar": 0.6, "category": "碳水来源"},
     "Oats": {"kcal": 379, "protein": 13.5, "carbs": 68, "fat": 6.5, "sugar": 1, "category": "碳水来源"},
-    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},
-    "Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "碳水来源"},
+    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},"Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "碳水来源"},
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
     "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"}，
-    "Sesam Cracker": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "碳水来源"}
+    
 
     # 脂肪来源
     "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},
@@ -32,11 +31,12 @@ foods = {
     
     # 蔬菜
     "Mixed Vegetables": {"kcal": 30, "protein": 2, "carbs": 5, "fat": 0.3, "sugar": 2, "category": "蔬菜"},
-# snack
+
+    # snack
     "Sesam-Cracker (4块/19g)": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "snack"},
-    "Sesam Cracker": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "碳水来源"}
-    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "脂肪来源"},
-     "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "脂肪来源"},
+    "Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "snack"},
+    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "snack"},
+    "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "snack"},
 }
 
 calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}

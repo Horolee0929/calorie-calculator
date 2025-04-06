@@ -23,6 +23,8 @@ foods = {
     "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},
     "Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "碳水来源"},
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
+    "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"}，
+    "Sesam Cracker": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "碳水来源"}
 
     # 脂肪来源
     "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},

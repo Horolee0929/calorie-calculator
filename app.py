@@ -35,7 +35,7 @@ foods = {
     # snack
     "Sesam-Cracker (4块/19g)": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "snack"},
     Sandwich Cracks (1块/16.25g)": {"kcal": 479, "protein": 10, "carbs": 56, "fat": 23, "sugar": 4, "category": "snack"},
-    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "snack"},
+    "Dark Chocolate (90%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "snack"},
     "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "snack"},
 }
 

@@ -29,11 +29,14 @@ foods = {
     # 脂肪来源
     "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},
     "Avocado": {"kcal": 160, "protein": 2, "carbs": 8.5, "fat": 15, "sugar": 0.7, "category": "脂肪来源"},
-    "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "脂肪来源"},
-    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "脂肪来源"},
-
+    
     # 蔬菜
     "Mixed Vegetables": {"kcal": 30, "protein": 2, "carbs": 5, "fat": 0.3, "sugar": 2, "category": "蔬菜"},
+# snack
+    "Sesam-Cracker (4块/19g)": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "snack"},
+    "Sesam Cracker": {"kcal": 468, "protein": 13, "carbs": 53, "fat": 20, "sugar": 3, "category": "碳水来源"}
+    "Dark Chocolate (85%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "脂肪来源"},
+     "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "脂肪来源"},
 }
 
 calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}
@@ -51,13 +54,15 @@ carb_options = [f for f, v in foods.items() if v["category"] == "碳水来源"]
 protein_options = [f for f, v in foods.items() if v["category"] == "蛋白质来源"]
 fat_options = [f for f, v in foods.items() if v["category"] == "脂肪来源"]
 veggie_options = [f for f, v in foods.items() if v["category"] == "蔬菜"]
+snack_options = [f for f, v in foods.items() if v["category"] == "snack"]
 
 selected_carbs = st.multiselect("🥖 选择碳水来源", carb_options)
 selected_proteins = st.multiselect("💪 选择蛋白质来源", protein_options)
 selected_fats = st.multiselect("🧈 选择脂肪来源", fat_options)
 selected_veggies = st.multiselect("🥦 选择蔬菜", veggie_options)
+selected_snacks = st.multiselect("🍘 选择零食/小吃", snack_options)
 
-selected_foods = selected_carbs + selected_proteins + selected_fats + selected_veggies
+selected_foods = selected_carbs + selected_proteins + selected_fats + selected_veggies + selected_snacks
 quantities = {}
 totals = {"kcal": 0, "protein": 0, "carbs": 0, "fat": 0, "sugar": 0}
 

@@ -96,9 +96,9 @@ if submitted and selected_foods:
     else:
         st.write("✅ 热量在建议区间内")
   
-    st.write(f"🥖 **总碳水**: {totals['carbs']:.1f} g")
-    st.write(f"🧈 **总脂肪**: {totals['fat']:.1f} g")
-    st.write(f"💪 **总蛋白质**: {totals['protein']:.1f} g")
+    st.write(f"🌾 **总碳水**: {totals['carbs']:.1f} g")
+    st.write(f"🥑 **总脂肪**: {totals['fat']:.1f} g")
+    st.write(f"🥚 **总蛋白质**: {totals['protein']:.1f} g")
 
     plan = plans[selected_plan]
     total_target_kcal = plan["carbs"] + plan["fat"] + plan["protein"]
@@ -140,9 +140,9 @@ if submitted and selected_foods:
 
     st.subheader("📋 Summary")
     output_text = f"""📊 今日总摄入：
-🥖 碳水：{totals['carbs']:.1f} g
-🧈 脂肪：{totals['fat']:.1f} g
-💪 蛋白质：{totals['protein']:.1f} g
+🌾 碳水：{totals['carbs']:.1f} g
+🥑 脂肪：{totals['fat']:.1f} g
+🥚 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 ：", output_text)
     

@@ -141,20 +141,20 @@ if submitted and selected_foods:
     st.subheader("📋 Summary")
     st.write(f"📏 总热量与目标计划差值：{total_diff_kcal:+.1f} kcal")
 
-    food_details = "
-".join([
-        f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
+    food_details = "\n".join([
+    f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
     ])
 
-    output_text = f"""📊 今日总摄入：
-🥖 碳水：{totals['carbs']:.1f} g
-🧈 脂肪：{totals['fat']:.1f} g
-💪 蛋白质：{totals['protein']:.1f} g
-🔥 热量：{totals['kcal']:.1f} kcal
-📉 热量差值：{total_diff_kcal:+.1f} kcal
 
-🥣 食物明细：
-{food_details}"""
+    output_text = f"""📊 今日总摄入：
+   🥖 碳水：{totals['carbs']:.1f} g
+   🧈 脂肪：{totals['fat']:.1f} g
+   💪 蛋白质：{totals['protein']:.1f} g
+   🔥 热量：{totals['kcal']:.1f} kcal
+   📉 热量差值：{total_diff_kcal:+.1f} kcal
+
+   🥣 食物明细：
+    {food_details}"""
 
     st.text_area("📎 可复制文本：", output_text)
 

@@ -167,9 +167,7 @@ if submitted and selected_foods:
      # 读取旧日志
     if os.path.exists(log_path):
         with open(log_path, "r", encoding="utf-8") as f:
-            lines = f.read().split("
-
-📅 ")
+            lines = f.read().split("📅 ")
         logs = {l[:10]: l for l in lines if len(l) > 10 and l[0].isdigit()}
     else:
         logs = {}
@@ -177,7 +175,7 @@ if submitted and selected_foods:
     # 更新今日记录
     today_str = datetime.now().strftime("%Y-%m-%d")
     logs[today_str] = f"📅 {today_str}
-" + output_text
+    " + output_text
 
     # 写入回日志
     all_dates = pd.date_range(start=min(logs.keys()), end=today_str).strftime("%Y-%m-%d")
@@ -186,12 +184,12 @@ if submitted and selected_foods:
             if d in logs:
                 f.write(f"
 
-{logs[d]}")
+    {logs[d]}")
             else:
                 f.write(f"
 
-📅 {d}
-NA")
+    📅 {d}
+    NA")
 
 
 

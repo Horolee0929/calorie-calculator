@@ -25,7 +25,7 @@ foods = {
     "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},"Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "碳水来源"},
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
     "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"},
-    
+    "Chickpeas": {"kcal": 128, "protein": 9, "carbs": 15, "fat": 2.7, "sugar": 0.5, "category": "碳水"},  
 
     # 脂肪来源
     "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},
@@ -145,7 +145,20 @@ if submitted and selected_foods:
 🥚 蛋白质：{totals['protein']:.1f} g
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 ：", output_text)
-    
+
+    # 添加食物明细文本
+    food_details = "
+".join([
+        f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
+    ])
+
+    full_output = output_text + "
+
+🥣 食物明细：
+" + food_details
+    st.text_area("📎 可复制文本：", full_output)
+
+
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []

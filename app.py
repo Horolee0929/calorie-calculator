@@ -180,9 +180,8 @@ if submitted and selected_foods:
     # 读取旧日志
     if os.path.exists(log_path):
         with open(log_path, "r", encoding="utf-8") as f:
-            lines = f.read().split("
-
-    📅 ")
+            lines = f.read().split("\n\n📅 ")
+            
         logs = {l[:10]: l for l in lines if len(l) > 10 and l[0].isdigit()}
     else:
         logs = {}
@@ -206,6 +205,7 @@ if submitted and selected_foods:
     📅 {d}
     NA")
 
+ 
 
 
 

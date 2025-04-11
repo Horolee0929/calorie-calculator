@@ -162,17 +162,43 @@ if submitted and selected_foods:
     {food_details}"""
     st.text_area("📎 可复制文本：", output_text)
 
-    # 保存日志到本地
-    import os
-    from datetime import datetime
+  
 
-    log_dir = "logs"
-    os.makedirs(log_dir, exist_ok=True)
+     # 读取旧日志
+    if os.path.exists(log_path):
+        with open(log_path, "r", encoding="utf-8") as f:
+            lines = f.read().split("
 
-    log_filename = os.path.join(log_dir, f"log_{datetime.now().strftime('%Y-%m-%d')}.txt")
-    with open(log_filename, "w", encoding="utf-8") as f: f.write(output_text)
+📅 ")
+        logs = {l[:10]: l for l in lines if len(l) > 10 and l[0].isdigit()}
+    else:
+        logs = {}
+
+    # 更新今日记录
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    logs[today_str] = f"📅 {today_str}
+" + output_text
+
+    # 写入回日志
+    all_dates = pd.date_range(start=min(logs.keys()), end=today_str).strftime("%Y-%m-%d")
+    with open(log_path, "w", encoding="utf-8") as f:
+        for d in all_dates:
+            if d in logs:
+                f.write(f"
+
+{logs[d]}")
+            else:
+                f.write(f"
+
+📅 {d}
+NA")
 
 
+
+
+
+
+    
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []

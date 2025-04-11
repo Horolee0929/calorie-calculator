@@ -162,7 +162,18 @@ if submitted and selected_foods:
     {food_details}"""
     st.text_area("📎 可复制文本：", output_text)
 
-    
+    # 保存日志到本地
+    import os
+    from datetime import datetime
+
+    log_dir = "logs"
+    os.makedirs(log_dir, exist_ok=True)
+
+    log_filename = os.path.join(log_dir, f"log_{datetime.now().strftime('%Y-%m-%d')}.txt")
+    with open(log_filename, "w", encoding="utf-8") as f:
+    f.write(output_text)
+
+
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []

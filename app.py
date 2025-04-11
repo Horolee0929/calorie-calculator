@@ -188,8 +188,8 @@ if submitted and selected_foods:
 
     # 更新今日记录
     today_str = datetime.now().strftime("%Y-%m-%d")
-    logs[today_str] = f"📅 {today_str}
-    " + output_text
+    logs[today_str] = f"📅 {today_str}\n" + output_text
+
 
     # 写入回日志
     all_dates = pd.date_range(start=min(logs.keys()), end=today_str).strftime("%Y-%m-%d")

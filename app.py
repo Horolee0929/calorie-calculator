@@ -138,7 +138,9 @@ if submitted and selected_foods:
     fig = px.pie(pie_data, names="来源", values="热量", hole=0.3)
     st.plotly_chart(fig)
 
-     st.subheader("📋 Summary")
+
+    # 💡 汇总 
+    st.subheader("📋 Summary")
     st.write(f"🔥 总摄入热量：{totals['kcal']:.1f} kcal")
     st.write(f"🥖 总碳水：{totals['carbs']:.1f} g")
     st.write(f"🧈 总脂肪：{totals['fat']:.1f} g")

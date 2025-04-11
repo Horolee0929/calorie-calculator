@@ -146,18 +146,12 @@ if submitted and selected_foods:
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 ：", output_text)
 
-   # 添加食物明细文本
-    food_details = "
-".join([
-        f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
-    ])
+  food_details = "\n".join([
+    f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
+])
 
-    full_output = output_text + "
-
-🥣 食物明细：
-" + food_details
-    st.text_area("📎 可复制文本：", full_output)
-
+full_output = output_text + "\n\n🥣 食物明细：\n" + food_details
+st.text_area("📎 可复制文本：", full_output)
 
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")

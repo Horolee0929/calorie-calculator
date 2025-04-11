@@ -160,14 +160,29 @@ if submitted and selected_foods:
 
    🥣 食物明细：
     {food_details}"""
+
     st.text_area("📎 可复制文本：", output_text)
+    st.download_button(
+        label="📥 下载今日饮食日志",
+        data=output_text,
+        file_name=f"log_{datetime.now().strftime('%Y-%m-%d')}.txt",
+        mime="text/plain"
+    )
 
-  
+    # 保存累积饮食日志（每天仅一条，覆盖同一天的旧记录）
+    import os
+    from datetime import datetime
 
-     # 读取旧日志
+    log_dir = "logs"
+    os.makedirs(log_dir, exist_ok=True)
+    log_path = os.path.join(log_dir, "diet_log.txt")
+
+    # 读取旧日志
     if os.path.exists(log_path):
         with open(log_path, "r", encoding="utf-8") as f:
-            lines = f.read().split("📅 ")
+            lines = f.read().split("
+
+    📅 ")
         logs = {l[:10]: l for l in lines if len(l) > 10 and l[0].isdigit()}
     else:
         logs = {}
@@ -190,7 +205,6 @@ if submitted and selected_foods:
 
     📅 {d}
     NA")
-
 
 
 

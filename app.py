@@ -139,14 +139,13 @@ if submitted and selected_foods:
     st.plotly_chart(fig)
 
     st.subheader("📋 Summary")
-    output_text = f"""📊 今日总摄入：
-🌾 碳水：{totals['carbs']:.1f} g
-🥑 脂肪：{totals['fat']:.1f} g
-🥚 蛋白质：{totals['protein']:.1f} g
-🔥 热量：{totals['kcal']:.1f} kcal"""
-    st.text_area("📎 ：", output_text)
-
- # 添加食物明细文本
+   output_text = f"""📊 今日总摄入：
+🥖 碳水：{totals['carbs']:.1f} g
+🧈 脂肪：{totals['fat']:.1f} g
+💪 蛋白质：{totals['protein']:.1f} g
+🔥 热量：{totals['kcal']:.1f} kcal
+📉 热量差值：{total_diff_kcal:+.1f} kcal"""
+        # 添加食物明细文本
     food_details = "
 ".join([
         f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
@@ -157,7 +156,6 @@ if submitted and selected_foods:
 🥣 食物明细：
 " + food_details
     st.text_area("📎 可复制文本：", full_output)
-
  # 💡 推荐补充建议
     st.subheader("🔄 推荐补充")
     suggestions = []

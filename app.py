@@ -170,7 +170,7 @@ if submitted and selected_foods:
     os.makedirs(log_dir, exist_ok=True)
 
     log_filename = os.path.join(log_dir, f"log_{datetime.now().strftime('%Y-%m-%d')}.txt")
-    with open(log_filename, "w", encoding="utf-8") as f.write(output_text)
+    with open(log_filename, "w", encoding="utf-8") as f: f.write(output_text)
 
 
  # 💡 推荐补充建议

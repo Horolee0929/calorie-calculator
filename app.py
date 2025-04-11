@@ -196,14 +196,11 @@ if submitted and selected_foods:
     with open(log_path, "w", encoding="utf-8") as f:
         for d in all_dates:
             if d in logs:
-                f.write(f"
+                
+                f.write(f"\n\n{logs[d]}")
+            else: 
+                f.write(f"\n\n📅 {d}\nNA")
 
-    {logs[d]}")
-            else:
-                f.write(f"
-
-    📅 {d}
-    NA")
 
  
 

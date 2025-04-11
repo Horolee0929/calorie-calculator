@@ -146,7 +146,7 @@ if submitted and selected_foods:
 🔥 热量：{totals['kcal']:.1f} kcal"""
     st.text_area("📎 ：", output_text)
 
-    # 添加食物明细文本
+   # 添加食物明细文本
     food_details = "
 ".join([
         f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0

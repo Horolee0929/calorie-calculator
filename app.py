@@ -27,6 +27,7 @@ foods = {
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
     "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"},
     "Chickpeas": {"kcal": 128, "protein": 9, "carbs": 15, "fat": 2.7, "sugar": 0.5, "category": "碳水来源"},  
+    "Banana": {"kcal": 89, "protein": 1.1, "carbs": 22.8, "fat": 0.3, "sugar": 12, "category": "碳水来源"},
 
     # 脂肪来源
     "Olive Oil": {"kcal": 884, "protein": 0, "carbs": 0, "fat": 100, "sugar": 0, "category": "脂肪来源"},

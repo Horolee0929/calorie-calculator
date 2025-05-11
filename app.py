@@ -18,6 +18,7 @@ foods = {
     "Greek Yogurt 2": {"kcal": 58, "protein": 11, "carbs": 3.5, "fat": 0, "sugar": 3.4, "category": "蛋白质来源"},
     "Boiled Egg (1个/53g)": {"kcal": 75.8, "protein": 6.9, "carbs": 0.6, "fat": 5.3, "sugar": 0.3, "category": "蛋白质来源"},
     "Pork Ribs (1块/45g)": {"kcal": 262, "protein": 17, "carbs": 0, "fat": 21, "sugar": 0, "category": "蛋白质来源"},
+    "Magerquark (100g)": {"kcal": 65, "protein": 11, "carbs": 4, "fat": 0.5, "sugar": 4, "category": "蛋白质来源"}
     "Chicken Drumstick (去皮, 1个/90g)": {"kcal": 155, "protein": 10, "carbs": 0, "fat": 9, "sugar": 0, "category": "蛋白质来源"},
 
     # 碳水来源
@@ -27,6 +28,7 @@ foods = {
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
     "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"},
     "Chickpeas": {"kcal": 128, "protein": 9, "carbs": 15, "fat": 2.7, "sugar": 0.5, "category": "碳水来源"},  
+    "Bread (100g)": {"kcal": 274, "protein": 11, "carbs": 45, "fat": 4.4, "sugar": 0.9, "category": "碳水来源"}
     "Banana": {"kcal": 89, "protein": 1.1, "carbs": 22.8, "fat": 0.3, "sugar": 12, "category": "碳水来源"},
 
     # 脂肪来源
@@ -41,6 +43,8 @@ foods = {
     "Sandwich Cracks (1块/16.25g)": {"kcal": 479, "protein": 10, "carbs": 56, "fat": 23, "sugar": 4, "category": "snack"},
     "Dark Chocolate (90%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "snack"},
     "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "snack"},
+    "玉米片 (100g)": {"kcal": 421, "protein": 4.3, "carbs": 71.2, "fat": 11.3, "sugar": 0.7, "category": "snack"}
+
 }
 
 calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}

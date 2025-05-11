@@ -7,7 +7,7 @@ st.set_page_config(page_title="卡路里计算器", layout="centered")
 st.title("🥗 卡路里计算器")
 
 # 每100g的营养数据（示例）
-foods = {
+    foods = {
     # 蛋白质来源
     "Cottage Cheese": {"kcal": 87, "protein": 10, "carbs": 2.7, "fat": 4, "sugar": 1.7, "category": "蛋白质来源"},
     "Salmon (raw)": {"kcal": 188, "protein": 20, "carbs": 0.5, "fat": 12, "sugar": 0, "category": "蛋白质来源"},
@@ -24,7 +24,7 @@ foods = {
     # 碳水来源
     "Protein Bread": {"kcal": 280, "protein": 11, "carbs": 20, "fat": 15, "sugar": 0.6, "category": "碳水来源"},
     "Oats": {"kcal": 379, "protein": 13.5, "carbs": 68, "fat": 6.5, "sugar": 1, "category": "碳水来源"},
-    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},"Sandwich Cracks (1块/16.25g)": {"kcal": 78.4, "protein": 1.6, "carbs": 8.9, "fat": 3.7, "sugar": 0.5, "category": "碳水来源"},
+    "Steamed Sweet Potato": {"kcal": 86, "protein": 1.6, "carbs": 20.1, "fat": 0.1, "sugar": 4.2, "category": "碳水来源"},
     "Cooked Rice": {"kcal": 130, "protein": 2.7, "carbs": 28, "fat": 0.3, "sugar": 0.1, "category": "碳水来源"},
     "Musli": {"kcal": 453, "protein": 23, "carbs": 45, "fat": 18, "sugar": 5, "category": "碳水来源"},
     "Chickpeas": {"kcal": 128, "protein": 9, "carbs": 15, "fat": 2.7, "sugar": 0.5, "category": "碳水来源"},  
@@ -44,8 +44,8 @@ foods = {
     "Dark Chocolate (90%)": {"kcal": 592, "protein": 10, "carbs": 14, "fat": 55, "sugar": 7, "category": "snack"},
     "Mixed Raw Nuts (Almonds, Macadamia, Cashew)": {"kcal": 657, "protein": 19, "carbs": 10, "fat": 59, "sugar": 4, "category": "snack"},
     "玉米片 (100g)": {"kcal": 421, "protein": 4.3, "carbs": 71.2, "fat": 11.3, "sugar": 0.7, "category": "snack"},
-
 }
+
 
 calories_per_gram = {"carbs": 4, "fat": 9, "protein": 4}
 

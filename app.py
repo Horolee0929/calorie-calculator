@@ -7,7 +7,7 @@ st.set_page_config(page_title="卡路里计算器", layout="centered")
 st.title("🥗 卡路里计算器")
 
 # 每100g的营养数据（示例）
-    foods = {
+foods = {
     # 蛋白质来源
     "Cottage Cheese": {"kcal": 87, "protein": 10, "carbs": 2.7, "fat": 4, "sugar": 1.7, "category": "蛋白质来源"},
     "Salmon (raw)": {"kcal": 188, "protein": 20, "carbs": 0.5, "fat": 12, "sugar": 0, "category": "蛋白质来源"},

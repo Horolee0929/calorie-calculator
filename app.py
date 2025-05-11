@@ -145,17 +145,7 @@ if submitted and selected_foods:
     st.plotly_chart(fig)
 
 
-    # 💡 汇总 
-    st.subheader("📋 Summary")
-    st.write(f"🔥 总摄入热量：{totals['kcal']:.1f} kcal")
-    st.write(f"🥖 总碳水：{totals['carbs']:.1f} g")
-    st.write(f"🧈 总脂肪：{totals['fat']:.1f} g")
-    st.write(f"💪 总蛋白质：{totals['protein']:.1f} g")
-    st.write(f"💪 热量差值：{total_diff_kcal:+.1f} kcal")
-
-    food_details = "\n".join([
-    f"{food}：{quantities[food]:.1f}g" for food in selected_foods if quantities[food] > 0
-    ])
+   
 
 
     output_text = f"""📊 今日总摄入：
